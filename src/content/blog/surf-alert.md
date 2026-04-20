@@ -11,7 +11,7 @@ A few weeks ago I decided to give it another shot at my local beach in Jupiter, 
 
 Defeated, I shared my experience with a few friendly locals. They told me **conditions matter here**. Ocean swell. Wave interval. Wind direction. Tide patterns. These gents dropped so much knowledge I felt like I needed a PhD in wavology to shred the local gnar.
 
-But they assured me when conditions were just right, the waves were magical. So, I had an idea-- what if I built a notification system that analyzed publicly available weather data and sent me an email when the conditions were good?
+But they assured me when conditions were just right, the waves were magical. So, I had an idea — what if I built a notification system that analyzed publicly available weather data and sent me an email when the conditions were good?
 
 ## The vision
 
@@ -91,12 +91,12 @@ function computeSurfScore(inputs: {
 }
 ```
 
-Pure function, no I/O, easy to tweak. If my weights turn out to be wrong, the fix is just a few lines lines.
+Pure function, no I/O, easy to tweak. If my weights turn out to be wrong, the fix is just a few lines.
 
 Initially, I set the "notification" mechanism to just store the results in a database and log to console. I ran it for a few days and took a look at the data.
 
-[insert the graph artifact here]
+![Jupiter, FL surf score over time, Apr 14–18 2026](/surf_score_plot.png)
 
-Looking at the surf score over time it looks like the threshold might be okay, but I might want to wait until two consecutive hours of good surf before sending an alert. Also, I'll have to put some guardrails on when to send the alert-- don't need an email at 2 in the morning.
+Looking at the surf score over time, it looks like the threshold might be okay, but I might want to wait until two consecutive hours of good surf before sending an alert. Also, I'll have to put some guardrails on when to send the alert — don't need an email at 2 in the morning.
 
-This week, I'll turn on the email alert and hit the ocean to verify the scoring algorithm. Surfs up dudes!
+This week, I'll turn on the email alert and hit the ocean to verify the scoring algorithm. Surf's up dudes!
