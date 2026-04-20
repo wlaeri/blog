@@ -127,6 +127,14 @@ const formattedDate = date.toLocaleDateString('en-US', {
     margin-bottom: 0.375rem;
   }
 
+  .prose :global(img) {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1.25rem 0;
+    border-radius: 8px;
+  }
+
   .prose :global(blockquote) {
     border-left: 3px solid var(--color-accent);
     padding-left: 1rem;
