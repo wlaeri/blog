@@ -13,6 +13,8 @@ interface Props {
 
 const { title, subtitle, description, date, heroImage, heroImageAlt, heroImageCaption } = Astro.props;
 
+const metaTitle = subtitle ? `${title} | ${subtitle}` : title;
+
 const formattedDate = date.toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'long',
@@ -21,7 +23,7 @@ const formattedDate = date.toLocaleDateString('en-US', {
 ---
 
 <Base
-  title={title}
+  title={metaTitle}
   description={description}
   ogImage={heroImage}
   ogType="article"
