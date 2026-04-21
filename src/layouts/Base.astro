@@ -2,9 +2,22 @@
 interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  publishedDate?: Date;
 }
 
-const { title, description = 'Blog by Will Laeri' } = Astro.props;
+const {
+  title,
+  description = 'Blog by Will Laeri',
+  ogImage,
+  ogType = 'website',
+  publishedDate,
+} = Astro.props;
+
+const siteName = 'Will Laeri';
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+const ogImageURL = ogImage ? new URL(ogImage, Astro.site).href : undefined;
 ---
 
 <!doctype html>
@@ -14,6 +27,30 @@ const { title, description = 'Blog by Will Laeri' } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="author" content="Will Laeri" />
+    <meta name="theme-color" content="#fafafa" />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    {ogImageURL && <meta property="og:image" content={ogImageURL} />}
+    {
+      ogType === 'article' && publishedDate && (
+        <meta property="article:published_time" content={publishedDate.toISOString()} />
+      )
+    }
+    {ogType === 'article' && <meta property="article:author" content="Will Laeri" />}
+
+    <meta name="twitter:card" content={ogImageURL ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImageURL && <meta name="twitter:image" content={ogImageURL} />}
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

@@ -3,6 +3,9 @@ title: 'Surf Alert'
 subtitle: 'Vibe coding a notification system for local surf conditions'
 description: 'I got humbled by Jupiter, FL, so I built a Cloudflare Worker that scores the surf every hour and pings me when it is worth paddling out.'
 date: 2026-04-20
+heroImage: '/juno-beach-sunrise.jpg'
+heroImageAlt: 'Juno Beach at sunrise'
+heroImageCaption: 'Juno Beach at sunrise'
 ---
 
 Last year I went surfing for the first time at Domes Beach in Rincón, Puerto Rico. It was awesome. I took a beating paddling out, but I was able to get up a few times and ride the waves back to shore. Dreams of becoming a surfer bro unlocked.
@@ -95,7 +98,10 @@ Pure function, no I/O, easy to tweak. If my weights turn out to be wrong, the fi
 
 Initially, I set the "notification" mechanism to just store the results in a database and log to console. I ran it for a few days and took a look at the data.
 
-![Jupiter, FL surf score over time, Apr 14–18 2026](/surf_score_plot.png)
+<figure>
+  <img src="/surf_score_plot.png" alt="Jupiter, FL surf score over time, Apr 14–18 2026" />
+  <figcaption>Jupiter, FL surf score over time, Apr 14–18 2026</figcaption>
+</figure>
 
 Looking at the surf score over time, it looks like the threshold might be okay, but I might want to wait until two consecutive hours of good surf before sending an alert. Also, I'll have to put some guardrails on when to send the alert — don't need an email at 2 in the morning.
 

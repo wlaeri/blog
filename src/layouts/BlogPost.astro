@@ -6,9 +6,12 @@ interface Props {
   subtitle?: string;
   description: string;
   date: Date;
+  heroImage?: string;
+  heroImageAlt?: string;
+  heroImageCaption?: string;
 }
 
-const { title, subtitle, description, date } = Astro.props;
+const { title, subtitle, description, date, heroImage, heroImageAlt, heroImageCaption } = Astro.props;
 
 const formattedDate = date.toLocaleDateString('en-US', {
   year: 'numeric',
@@ -17,13 +20,27 @@ const formattedDate = date.toLocaleDateString('en-US', {
 });
 ---
 
-<Base title={title} description={description}>
+<Base
+  title={title}
+  description={description}
+  ogImage={heroImage}
+  ogType="article"
+  publishedDate={date}
+>
   <article>
     <header>
       <time datetime={date.toISOString()}>{formattedDate}</time>
       <h1>{title}</h1>
       {subtitle && <p class="subtitle">{subtitle}</p>}
     </header>
+    {
+      heroImage && (
+        <figure class="hero">
+          <img src={heroImage} alt={heroImageAlt ?? ''} />
+          {heroImageCaption && <figcaption>{heroImageCaption}</figcaption>}
+        </figure>
+      )
+    }
     <div class="prose">
       <slot />
     </div>
@@ -60,6 +77,26 @@ const formattedDate = date.toLocaleDateString('en-US', {
     color: var(--color-text-secondary);
     font-weight: 400;
     margin-top: 0.375rem;
+    line-height: 1.5;
+  }
+
+  .hero {
+    margin: 0 0 2rem;
+  }
+
+  .hero img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .hero figcaption {
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    font-style: italic;
+    text-align: center;
+    margin-top: 0.5rem;
     line-height: 1.5;
   }
 
@@ -133,6 +170,23 @@ const formattedDate = date.toLocaleDateString('en-US', {
     display: block;
     margin: 1.25rem 0;
     border-radius: 8px;
+  }
+
+  .prose :global(figure) {
+    margin: 1.5rem 0;
+  }
+
+  .prose :global(figure img) {
+    margin: 0;
+  }
+
+  .prose :global(figcaption) {
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    font-style: italic;
+    text-align: center;
+    margin-top: 0.5rem;
+    line-height: 1.5;
   }
 
   .prose :global(blockquote) {
